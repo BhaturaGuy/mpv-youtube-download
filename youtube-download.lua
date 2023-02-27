@@ -982,31 +982,25 @@ function create_menu_data()
     local not_youtube = url == nil or (url:find("ytdl://") ~= 1 and url:find("https?://") ~= 1)
 
     local items = {
-      {
-        title = 'Audio',
-        hint = tostring(audio_format),
-        icon = 'audiotrack',
-        value = menu_command('audio_default_quality'),
+	  {
+        title = 'Video (Best quality)',
+        hint = tostring(video_format),
+        icon = '1k_plus',
+        value = menu_command('video_embed_subtitle_config_file'),
         keep_open = false
       },
-      {
+	  {
         title = 'Video (Current quality)',
         hint = tostring(current_format),
-        icon = 'play_circle_filled',
+        icon = '1k',
         value = menu_command('video_current_quality'),
         keep_open = false
       },
       {
-        title = 'Video (Default quality)',
-        hint = tostring(video_format),
-        icon = 'download',
-        value = menu_command('video_default_quality'),
-        keep_open = false
-      },
-      {
-        title = 'Video with subtitles',
-        icon = 'hearing_disabled',
-        value = menu_command('embed_subtitle_default_quality'),
+        title = 'Audio',
+        hint = tostring(audio_format),
+        icon = 'graphic_eq',
+        value = menu_command('audio_default_quality'),
         keep_open = false
       },
       {
@@ -1016,46 +1010,8 @@ function create_menu_data()
         value = menu_command('subtitle'),
         keep_open = false
       },
-      {
-        title = 'Select range',
-        icon = 'content_cut',
-        value = menu_command('cut'),
-        keep_open = false
-      },
     }
 
-    if not_empty(opts.download_video_config_file) then
-        table.insert(items, {
-            title = 'Video (Config file)',
-            icon = 'build',
-            value = menu_command('video_config_file'),
-            keep_open = false
-        })
-    end
-    if not_empty(opts.download_audio_config_file) then
-        table.insert(items, {
-            title = 'Audio (Config file)',
-            icon = 'build',
-            value = menu_command('audio_config_file'),
-            keep_open = false
-        })
-    end
-    if not_empty(opts.download_subtitle_config_file) then
-        table.insert(items, {
-            title = 'Subtitle (Config file)',
-            icon = 'build',
-            value = menu_command('subtitle_config_file'),
-            keep_open = false
-        })
-    end
-    if not_empty(opts.download_video_embed_subtitle_config_file) then
-        table.insert(items, {
-            title = 'Video with subtitles (Config file)',
-            icon = 'build',
-            value = menu_command('video_embed_subtitle_config_file'),
-            keep_open = false
-        })
-    end
     if not_youtube then
         table.insert(items, 1, {
             title = 'Current file is not a youtube video',
